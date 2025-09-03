@@ -1,0 +1,628 @@
+# serializer version: 1
+# name: test_detect_cycle_cpp
+  '''
+  #include <bits/stdc++.h>
+  #include <nlohmann/json.hpp>
+  using json = nlohmann::json;
+  using namespace std;
+  
+  class Solution {
+  public:
+      bool detectCycle(std::vector<std::vector<int>> graph) {
+          // Write your logic here
+          return {};
+      }
+  };
+  
+  
+  int main() {
+      string input;
+      string line;
+      while (getline(cin, line)) {
+          input += line;
+      }
+      json data = json::parse(input);
+      Solution solution;
+      vector<vector<int>> graph = data["graph"].get<vector<vector<int>>>();
+      auto result = solution.detectCycle(graph);
+      cout << json(result).dump() << endl;
+      return 0;
+  }
+  
+  '''
+# ---
+# name: test_detect_cycle_java
+  '''
+  import java.util.*;
+  import com.google.gson.*;
+  import java.io.InputStreamReader;
+  import java.io.BufferedReader;
+  
+  public class Solution {
+      public boolean detectCycle(List<List<Integer>> graph) {
+          // Write your logic here
+          return null;
+      }
+  
+      public static void main(String[] args) throws Exception {
+          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+          StringBuilder sb = new StringBuilder();
+          String line;
+          while ((line = br.readLine()) != null) {
+              sb.append(line);
+          }
+          Gson gson = new Gson();
+          JsonObject data = gson.fromJson(sb.toString(), JsonObject.class);
+          Solution solution = new Solution();
+          List<List<Integer>> graph = gson.fromJson(data.get("graph"), new TypeToken<List<List<Integer>>>(){}.getType());
+          boolean result = solution.detectCycle(graph);
+          System.out.println(gson.toJson(result));
+      }
+  }
+  
+  '''
+# ---
+# name: test_detect_cycle_javascript
+  '''
+  const fs = require('fs');
+  class Solution {
+      detectCycle(graph) {
+          // Write your logic here
+          return null;
+      }
+  }
+  
+  
+  const input = fs.readFileSync(0, 'utf-8');
+  const data = JSON.parse(input);
+  const solution = new Solution();
+  const graph = data['graph'];
+  let result = solution.detectCycle(graph);
+  console.log(JSON.stringify(result));
+  
+  '''
+# ---
+# name: test_detect_cycle_python
+  '''
+  from typing import List, Optional
+  
+  class Solution:
+      def detectCycle(self, graph: List[List[int]]) -> bool:
+          # Write your logic here
+          pass
+  
+  if __name__ == "__main__":
+      import sys, json
+      data = json.loads(sys.stdin.read())
+      kwargs = {}
+      kwargs['graph'] = data.get('graph')
+      result = Solution().detectCycle(**kwargs)
+      print(json.dumps(result))
+  
+  '''
+# ---
+# name: test_fibonacci_cpp
+  '''
+  #include <bits/stdc++.h>
+  #include <nlohmann/json.hpp>
+  using json = nlohmann::json;
+  using namespace std;
+  
+  class Solution {
+  public:
+      int fib(int n) {
+          // Write your logic here
+          return {};
+      }
+  };
+  
+  
+  int main() {
+      string input;
+      string line;
+      while (getline(cin, line)) {
+          input += line;
+      }
+      json data = json::parse(input);
+      Solution solution;
+      int n = data["n"].get<int >();
+      auto result = solution.fib(n);
+      cout << json(result).dump() << endl;
+      return 0;
+  }
+  
+  '''
+# ---
+# name: test_fibonacci_java
+  '''
+  import java.util.*;
+  import com.google.gson.*;
+  import java.io.InputStreamReader;
+  import java.io.BufferedReader;
+  
+  public class Solution {
+      public int fib(int n) {
+          // Write your logic here
+          return null;
+      }
+  
+      public static void main(String[] args) throws Exception {
+          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+          StringBuilder sb = new StringBuilder();
+          String line;
+          while ((line = br.readLine()) != null) {
+              sb.append(line);
+          }
+          Gson gson = new Gson();
+          JsonObject data = gson.fromJson(sb.toString(), JsonObject.class);
+          Solution solution = new Solution();
+          int n = data.get("n").getAsInt();
+          int result = solution.fib(n);
+          System.out.println(gson.toJson(result));
+      }
+  }
+  
+  '''
+# ---
+# name: test_fibonacci_javascript
+  '''
+  const fs = require('fs');
+  class Solution {
+      fib(n) {
+          // Write your logic here
+          return null;
+      }
+  }
+  
+  
+  const input = fs.readFileSync(0, 'utf-8');
+  const data = JSON.parse(input);
+  const solution = new Solution();
+  const n = data['n'];
+  let result = solution.fib(n);
+  console.log(JSON.stringify(result));
+  
+  '''
+# ---
+# name: test_fibonacci_python
+  '''
+  from typing import List, Optional
+  
+  class Solution:
+      def fib(self, n: int) -> int:
+          # Write your logic here
+          pass
+  
+  if __name__ == "__main__":
+      import sys, json
+      data = json.loads(sys.stdin.read())
+      kwargs = {}
+      kwargs['n'] = data.get('n')
+      result = Solution().fib(**kwargs)
+      print(json.dumps(result))
+  
+  '''
+# ---
+# name: test_lowest_common_ancestor_cpp
+  '''
+  #include <bits/stdc++.h>
+  #include <nlohmann/json.hpp>
+  using json = nlohmann::json;
+  using namespace std;
+  
+  
+  struct TreeNode {
+      int val;
+      TreeNode* left;
+      TreeNode* right;
+      TreeNode() : val(0), left(nullptr), right(nullptr) {}
+      TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+      TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+  };
+  
+  TreeNode* buildTreeNode(const json& data) {
+      if (data.is_null()) return nullptr;
+      TreeNode* node = new TreeNode(data["val"].get<int>());
+      node->left = buildTreeNode(data["left"]);
+      node->right = buildTreeNode(data["right"]);
+      return node;
+  }
+  
+  json serializeTreeNode(TreeNode* node) {
+      if (!node) return nullptr;
+      json res;
+      res["val"] = node->val;
+      res["left"] = serializeTreeNode(node->left);
+      res["right"] = serializeTreeNode(node->right);
+      return res;
+  }
+  class Solution {
+  public:
+      TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+          // Write your logic here
+          return {};
+      }
+  };
+  
+  
+  int main() {
+      string input;
+      string line;
+      while (getline(cin, line)) {
+          input += line;
+      }
+      json data = json::parse(input);
+      Solution solution;
+      TreeNode* root = buildTreeNode(data["root"]);
+      TreeNode* p = buildTreeNode(data["p"]);
+      TreeNode* q = buildTreeNode(data["q"]);
+      auto result = solution.lowestCommonAncestor(root, p, q);
+      json serialized = serializeTreeNode(result);
+      cout << serialized.dump() << endl;
+      return 0;
+  }
+  
+  '''
+# ---
+# name: test_lowest_common_ancestor_java
+  '''
+  import java.util.*;
+  import com.google.gson.*;
+  import java.io.InputStreamReader;
+  import java.io.BufferedReader;
+  
+  public class Solution {
+  
+      public static class TreeNode {
+          int val;
+          TreeNode left;
+          TreeNode right;
+          TreeNode() {}
+          TreeNode(int val) { this.val = val; }
+          TreeNode(int val, TreeNode left, TreeNode right) {
+              this.val = val;
+              this.left = left;
+              this.right = right;
+          }
+      }
+  
+      public static TreeNode buildTreeNode(JsonObject data) {
+          if (data == null || data.isJsonNull()) return null;
+          TreeNode node = new TreeNode(data.get("val").getAsInt());
+          node.left = buildTreeNode((JsonObject) data.get("left"));
+          node.right = buildTreeNode((JsonObject) data.get("right"));
+          return node;
+      }
+  
+      public static JsonObject serializeTreeNode(TreeNode node) {
+          if (node == null) return null;
+          JsonObject res = new JsonObject();
+          res.addProperty("val", node.val);
+          res.add("left", serializeTreeNode(node.left));
+          res.add("right", serializeTreeNode(node.right));
+          return res;
+      }
+      public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+          // Write your logic here
+          return null;
+      }
+  
+      public static void main(String[] args) throws Exception {
+          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+          StringBuilder sb = new StringBuilder();
+          String line;
+          while ((line = br.readLine()) != null) {
+              sb.append(line);
+          }
+          Gson gson = new Gson();
+          JsonObject data = gson.fromJson(sb.toString(), JsonObject.class);
+          Solution solution = new Solution();
+          TreeNode root = buildTreeNode(data.getAsJsonObject("root"));
+          TreeNode p = buildTreeNode(data.getAsJsonObject("p"));
+          TreeNode q = buildTreeNode(data.getAsJsonObject("q"));
+          TreeNode result = solution.lowestCommonAncestor(root, p, q);
+          JsonObject serialized = serializeTreeNode(result);
+          System.out.println(gson.toJson(serialized));
+      }
+  }
+  
+  '''
+# ---
+# name: test_lowest_common_ancestor_javascript
+  '''
+  const fs = require('fs');
+  
+  class TreeNode {
+      constructor(val = 0, left = null, right = null) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+      }
+  }
+  
+  function buildTreeNode(data) {
+      if (!data) return null;
+      const node = new TreeNode(data.val);
+      node.left = buildTreeNode(data.left);
+      node.right = buildTreeNode(data.right);
+      return node;
+  }
+  
+  function serializeTreeNode(node) {
+      if (!node) return null;
+      return {
+          val: node.val,
+          left: serializeTreeNode(node.left),
+          right: serializeTreeNode(node.right)
+      };
+  }
+  class Solution {
+      lowestCommonAncestor(root, p, q) {
+          // Write your logic here
+          return null;
+      }
+  }
+  
+  
+  const input = fs.readFileSync(0, 'utf-8');
+  const data = JSON.parse(input);
+  const solution = new Solution();
+  const root = buildTreeNode(data['root']);
+  const p = buildTreeNode(data['p']);
+  const q = buildTreeNode(data['q']);
+  let result = solution.lowestCommonAncestor(root, p, q);
+  result = serializeTreeNode(result);
+  console.log(JSON.stringify(result));
+  
+  '''
+# ---
+# name: test_lowest_common_ancestor_python
+  '''
+  from typing import List, Optional
+  
+  class TreeNode:
+      def __init__(self, val=0, left=None, right=None):
+          self.val = val
+          self.left = left
+          self.right = right
+  
+  def build_treenode(data: Dict) -> Optional[TreeNode]:
+      if data is None: return None
+      node = TreeNode(data.get('val', 0))
+      node.left = build_treenode(data.get('left'))
+      node.right = build_treenode(data.get('right'))
+      return node
+  
+  def serialize_treenode(node: Optional[TreeNode]) -> Optional[Dict]:
+      if node is None: return None
+      return {'val': node.val, 'left': serialize_treenode(node.left), 'right': serialize_treenode(node.right)}
+  
+  class Solution:
+      def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+          # Write your logic here
+          pass
+  
+  if __name__ == "__main__":
+      import sys, json
+      data = json.loads(sys.stdin.read())
+      kwargs = {}
+      kwargs['root'] = build_treenode(data.get('root'))
+      kwargs['p'] = build_treenode(data.get('p'))
+      kwargs['q'] = build_treenode(data.get('q'))
+      result = Solution().lowestCommonAncestor(**kwargs)
+      result = serialize_treenode(result)
+      print(json.dumps(result))
+  
+  '''
+# ---
+# name: test_merge_k_lists_cpp
+  '''
+  #include <bits/stdc++.h>
+  #include <nlohmann/json.hpp>
+  using json = nlohmann::json;
+  using namespace std;
+  
+  
+  struct ListNode {
+      int val;
+      ListNode* next;
+      ListNode() : val(0), next(nullptr) {}
+      ListNode(int x) : val(x), next(nullptr) {}
+      ListNode(int x, ListNode* next) : val(x), next(next) {}
+  };
+  
+  ListNode* buildListNode(const json& arr) {
+      if (arr.empty()) return nullptr;
+      ListNode* head = new ListNode(arr[0].get<int>());
+      ListNode* curr = head;
+      for (size_t i = 1; i < arr.size(); ++i) {
+          curr->next = new ListNode(arr[i].get<int>());
+          curr = curr->next;
+      }
+      return head;
+  }
+  
+  json serializeListNode(ListNode* head) {
+      json res = json::array();
+      while (head) {
+          res.push_back(head->val);
+          head = head->next;
+      }
+      return res;
+  }
+  class Solution {
+  public:
+      ListNode* mergeKLists(std::vector<ListNode*> lists) {
+          // Write your logic here
+          return {};
+      }
+  };
+  
+  
+  int main() {
+      string input;
+      string line;
+      while (getline(cin, line)) {
+          input += line;
+      }
+      json data = json::parse(input);
+      Solution solution;
+      std::vector<ListNode*> lists = data["lists"].get<std::vector<ListNode*> >();
+      auto result = solution.mergeKLists(lists);
+      json serialized = serializeListNode(result);
+      cout << serialized.dump() << endl;
+      return 0;
+  }
+  
+  '''
+# ---
+# name: test_merge_k_lists_java
+  '''
+  import java.util.*;
+  import com.google.gson.*;
+  import java.io.InputStreamReader;
+  import java.io.BufferedReader;
+  
+  public class Solution {
+  
+      public static class ListNode {
+          int val;
+          ListNode next;
+          ListNode() {}
+          ListNode(int val) { this.val = val; }
+          ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+      }
+  
+      public static ListNode buildListNode(JsonArray arr) {
+          if (arr == null || arr.size() == 0) return null;
+          ListNode head = new ListNode(arr.get(0).getAsInt());
+          ListNode curr = head;
+          for (int i = 1; i < arr.size(); i++) {
+              curr.next = new ListNode(arr.get(i).getAsInt());
+              curr = curr.next;
+          }
+          return head;
+      }
+  
+      public static JsonArray serializeListNode(ListNode head) {
+          JsonArray res = new JsonArray();
+          while (head != null) {
+              res.add(head.val);
+              head = head.next;
+          }
+          return res;
+      }
+      public ListNode mergeKLists(List<ListNode> lists) {
+          // Write your logic here
+          return null;
+      }
+  
+      public static void main(String[] args) throws Exception {
+          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+          StringBuilder sb = new StringBuilder();
+          String line;
+          while ((line = br.readLine()) != null) {
+              sb.append(line);
+          }
+          Gson gson = new Gson();
+          JsonObject data = gson.fromJson(sb.toString(), JsonObject.class);
+          Solution solution = new Solution();
+          List<ListNode> lists_list = gson.fromJson(data.get("lists"), new TypeToken<List<ListNode>>{}.getType());
+          ListNode[] lists = lists_list.toArray(new ListNode[0]);
+          ListNode result = solution.mergeKLists(lists);
+          JsonArray serialized = serializeListNode(result);
+          System.out.println(gson.toJson(serialized));
+      }
+  }
+  
+  '''
+# ---
+# name: test_merge_k_lists_javascript
+  '''
+  const fs = require('fs');
+  
+  class ListNode {
+      constructor(val = 0, next = null) {
+          this.val = val;
+          this.next = next;
+      }
+  }
+  
+  function buildListNode(arr) {
+      if (!arr || arr.length === 0) return null;
+      let head = new ListNode(arr[0]);
+      let curr = head;
+      for (let i = 1; i < arr.length; i++) {
+          curr.next = new ListNode(arr[i]);
+          curr = curr.next;
+      }
+      return head;
+  }
+  
+  function serializeListNode(head) {
+      const res = [];
+      while (head) {
+          res.push(head.val);
+          head = head.next;
+      }
+      return res;
+  }
+  class Solution {
+      mergeKLists(lists) {
+          // Write your logic here
+          return null;
+      }
+  }
+  
+  
+  const input = fs.readFileSync(0, 'utf-8');
+  const data = JSON.parse(input);
+  const solution = new Solution();
+  const lists = data['lists'];
+  let result = solution.mergeKLists(lists);
+  result = serializeListNode(result);
+  console.log(JSON.stringify(result));
+  
+  '''
+# ---
+# name: test_merge_k_lists_python
+  '''
+  from typing import List, Optional
+  
+  class ListNode:
+      def __init__(self, val=0, next=None):
+          self.val = val
+          self.next = next
+  
+  def build_listnode(arr: List[int]) -> Optional[ListNode]:
+      if not arr: return None
+      head = ListNode(arr[0])
+      curr = head
+      for val in arr[1:]:
+          curr.next = ListNode(val)
+          curr = curr.next
+      return head
+  
+  def serialize_listnode(head: Optional[ListNode]) -> List[int]:
+      res = []
+      while head:
+          res.append(head.val)
+          head = head.next
+      return res
+  
+  class Solution:
+      def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+          # Write your logic here
+          pass
+  
+  if __name__ == "__main__":
+      import sys, json
+      data = json.loads(sys.stdin.read())
+      kwargs = {}
+      kwargs['lists'] = data.get('lists')
+      result = Solution().mergeKLists(**kwargs)
+      result = serialize_listnode(result)
+      print(json.dumps(result))
+  
+  '''
+# ---
