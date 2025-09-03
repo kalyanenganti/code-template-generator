@@ -1,2 +1,24 @@
 # code-template-generator
-generates code template for selected user language
+Generates code template for selected user language
+Run the following to setup the backend project
+
+
+#BACKEND API
+1. git clone https://github.com/kalyanenganti/code-template-generator
+2. python -m venv venv
+3. venv/Scripts/activate.bat (for windows) or source venv/bin/activate (for linux)
+4. pip install -r requirements.txt
+5. fastapi dev main.py (for dev ) fastapi run (prod)
+
+
+
+#TEST SUITE
+Instructions for Running the Test Suite
+
+Install dependencies: pip install pytest syrupy (syrupy handles snapshot assertions; it's lightweight and integrates seamlessly with pytest).
+Ensure your backend module (e.g., main.py) is in the project root, and tests/ directory exists with the test_generators.py.
+Run the tests: pytest tests/test_generators.py
+
+On first run, syrupy will generate snapshot files in a __snapshots__/ directory within tests/. These store the expected template strings.
+If templates change (e.g., due to code updates), run pytest tests/test_generators.py --snapshot-update to regenerate snapshots, then commit them to version control.
+For verbose output: pytest -v tests/test_generators.py

@@ -1,0 +1,20 @@
+Architecture Overview
+The system is split into backend (API) and frontend (UI). The backend is a FastAPI app running on Uvicorn, with a single POST endpoint /api/v1/template. Input validation uses Pydantic models to enforce the schema, including language restrictions and basic type checks (though full DSL parsing happens in generation for flexibility). Template generation is language-agnostic at the high level but uses per-language functions to produce idiomatic code.
+Type mapping uses a recursive function to handle primitives, arrays (T[]), linked lists (List), trees (Tree), and graphs (Graph). Complex types trigger inclusion of class/struct definitions and helper functions for JSON deserialization/serialization. IO boilerplate reads JSON from STDIN, deserializes parameters, calls the user function, serializes the return, and prints to STDOUT—hiding all from the candidate.
+Template Strategy
+
+Python: Uses typing hints, class Solution, and dynamic **kwargs for calls. Helpers for ListNode/TreeNode if needed.
+Java: Uses List for arrays, assumes Gson for JSON. Static nested classes for ListNode/TreeNode.
+C++: Uses vector for arrays, assumes nlohmann/json. Structs for ListNode/TreeNode with pointers.
+JavaScript: Uses JSDoc for types, class Solution. Built-in JSON.parse for IO.
+Validation: If unknown types or malformed DSL (e.g., invalid nesting), raises 400 errors.
+Multiple Returns: The schema shows single return, but extensibility allows for tuples/pairs if updated (not implemented as per spec).
+
+Future Extensibility
+
+Add languages: Register in type/primitive maps and add a generator function.
+New types: Extend get_language_type (e.g., for "Matrix" as int[][]).
+Multiple returns: Change returns to list of types, generate tuples (Python), Pair (Java/C++), arrays (JS).
+Performance: Generation is O(1) per request; scale with containerization (e.g., Docker).
+Security: Rate limiting and payload size limits can be added via FastAPI middleware.
+Testing: Snapshot tests ensure templates match expected output; expand for more scenarios.
