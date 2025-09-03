@@ -1,5 +1,5 @@
 Architecture Overview
-The system is split into backend (API) and frontend (UI). The backend is a FastAPI app running on Uvicorn, with a single POST endpoint /api/v1/template. Input validation uses Pydantic models to enforce the schema, including language restrictions and basic type checks (though full DSL parsing happens in generation for flexibility). Template generation is language-agnostic at the high level but uses per-language functions to produce idiomatic code.
+The backend is a FastAPI app running on Uvicorn, with a single POST endpoint /api/v1/template. Input validation uses Pydantic models to enforce the schema, including language restrictions and basic type checks (though full DSL parsing happens in generation for flexibility). Template generation is language-agnostic at the high level but uses per-language functions to produce idiomatic code.
 Type mapping uses a recursive function to handle primitives, arrays (T[]), linked lists (List), trees (Tree), and graphs (Graph). Complex types trigger inclusion of class/struct definitions and helper functions for JSON deserialization/serialization. IO boilerplate reads JSON from STDIN, deserializes parameters, calls the user function, serializes the return, and prints to STDOUT—hiding all from the candidate.
 Template Strategy
 
