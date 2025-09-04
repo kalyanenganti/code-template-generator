@@ -42,4 +42,5 @@ Paste the following in the request body and press execute:
 "language": "python"
 }"
 You should see the repsonse if the request is successful or error if any with the message.
-<img width="1334" height="652" alt="image" src="https://github.com/user-attachments/assets/e2d5c8f8-cc04-4c18-b603-661acefbb35b" />
+<img width="1316" height="588" alt="image" src="https://github.com/user-attachments/assets/b8e33764-a8cb-4ba1-92bd-374746bdb035" />
+
