@@ -23,10 +23,12 @@ On first run, syrupy will generate snapshot files in a __snapshots__/ directory 
 If templates change (e.g., due to code updates), run pytest tests/test_generators.py --snapshot-update to regenerate snapshots, then commit them to version control.
 For verbose output: pytest -v tests/test_generators.py
 
-Validation:
+#VALIDATION
+
+
 Navigate to http://<your_hostname>:8000/docs to access the swagger UI.
 Click on the post /api/vi/template request try it out:
-Paste the following in the request body and press execute:
+Paste the following in the request body and click execute:
 "{
 "question_id": "two-sum",
 "title": "Two Sum",
